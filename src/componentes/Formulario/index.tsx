@@ -11,12 +11,13 @@ interface FormularioProps {
 
 }
 
-const Formulario = (props : FormularioProps) => {
+const Formulario = (props: FormularioProps) => {
 
     const [nome, setNome] = useState('')
     const [cargo, setCargo] = useState('')
     const [imagem, setImagem] = useState('')
     const [time, setTime] = useState('')
+    const [data, setData] = useState('')
 
     const aoSalvar = (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault()
@@ -24,41 +25,50 @@ const Formulario = (props : FormularioProps) => {
             nome,
             cargo,
             imagem,
-            time
+            time,
+            data
         })
         setNome('')
         setCargo('')
         setImagem('')
         setTime('')
+        setData('')
     }
 
     return (
         <section className="formulario">
-            <form onSubmit={evento => aoSalvar(evento)}> 
+            <form onSubmit={evento => aoSalvar(evento)}>
                 <h2>Preencha os dados para criar o card do colaborador</h2>
-                <CampoTexto 
+                <CampoTexto
                     obrigatorio={true}
                     label="Nome"
-                    placeholder="Digite seu nome" 
+                    placeholder="Digite seu nome"
                     valor={nome}
                     aoAlterado={valor => setNome(valor)}
                 />
                 <CampoTexto
                     obrigatorio={true}
                     label="Cargo"
-                    placeholder="Digite seu cargo" 
+                    placeholder="Digite seu cargo"
                     valor={cargo}
                     aoAlterado={valor => setCargo(valor)}
                 />
                 <CampoTexto
                     label="Imagem"
-                    placeholder="Digite o endereço da imagem" 
+                    placeholder="Digite o endereço da imagem"
                     valor={imagem}
                     aoAlterado={valor => setImagem(valor)}
                 />
+                <CampoTexto
+                    label="Data de entrada no time"
+                    placeholder=""
+                    valor={data}
+                    aoAlterado={valor => setData(valor)}
+                    tipo='date'
+                />
                 <ListaSuspensa
                     obrigatorio={true}
-                    label="Time" 
+                    label="Time"
                     itens={props.times}
                     valor={time}
                     aoAlterado={valor => setTime(valor)}
